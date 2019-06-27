@@ -1,6 +1,6 @@
 import { find, head, map, replace, slice } from 'ramda'
 
-// import { SKU } from '../../../graphql/types/Product'
+import { toSKUIOMessage } from './../../utils/ioMessage'
 
 export const resolvers = {
   SKU: {
@@ -37,10 +37,29 @@ export const resolvers = {
       sku.variations || []
     ),
 
-    // nameComplete: (
-    //   { nameComplete, itemId }: SKU,
-    //   _: any,
-    //   { clients: { segment } }: Context
-    // ) => toSKUIOMessage('nameComplete')(segment, nameComplete, itemId),
+    nameComplete: (
+      { nameComplete, itemId }: SKU,
+      _: any,
+      { clients: { segment } }: Context
+    ) => toSKUIOMessage('nameComplete')(segment, nameComplete, itemId),
+
+    productName: (
+      { productName, itemId }: SKU,
+      _: any,
+      { clients: { segment } }: Context
+    ) => toSKUIOMessage('productName')(segment, productName, itemId),
+
+    productDescription: (
+      { productDescription, itemId }: SKU,
+      _: any,
+      { clients: { segment } }: Context
+    ) => toSKUIOMessage('productDescription')(segment, productDescription, itemId),
+
+    skuName: (
+      { skuName, itemId }: SKU,
+      _: any,
+      { clients: { segment } }: Context
+    ) => toSKUIOMessage('skuName')(segment, skuName, itemId),
+
   }
 }
