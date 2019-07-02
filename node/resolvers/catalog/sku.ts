@@ -60,6 +60,6 @@ export const resolvers = {
       _: any,
       { clients: { segment } }: Context
     ) => toSKUIOMessage('skuName')(segment, skuName, itemId),
-
+    
   }
 }
