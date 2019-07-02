@@ -110,7 +110,9 @@ type SKU {
   kitItems: [KitItem]
   images (quantity: Int = 10) : [Image]
   sellers: [Seller]
+
   variations: [Property]
+  
   attachments: [Attachment]
   calculatedAttachments: String
   
