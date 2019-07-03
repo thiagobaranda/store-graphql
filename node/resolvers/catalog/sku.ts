@@ -83,11 +83,11 @@ export const resolvers = {
       return skuSpecifications
     },
 
-    skuName: (
-      { skuName, itemId }: SKU,
+    name: (
+      { name, itemId }: SKU,
       _: any,
       { clients: { segment } }: Context
-    ) => toSKUIOMessage('skuName')(segment, skuName, itemId),
+    ) => toSKUIOMessage('name')(segment, name, itemId),
     
   }
 }
