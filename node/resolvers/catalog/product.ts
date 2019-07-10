@@ -105,11 +105,11 @@ export const resolvers = {
       { clients: { segment } }: Context
     ) => toProductIOMessage('descriptionShort')(segment, descriptionShort, productId),
 
-    keyWords: (
-      { keyWords, productId }: any,
+    keywords: (
+      { keywords, productId }: any,
       _: any,
       { clients: { segment } }: Context
-    ) => toProductIOMessage('keyWords')(segment, keyWords, productId),
+    ) => toProductIOMessage('keywords')(segment, keywords, productId),
 
     title: (
       { title, productId }: any,
@@ -175,7 +175,7 @@ export const resolvers = {
     },
 
     items: (product: any, _: any, { clients: { segment } }: Context) => {
-      const {allSpecifications, items, productId} = product
+      const {allSpecifications, items, productId, productName, description: productDescription} = product
       let productSpecifications = new Array() as [productSpecification]
 
       (allSpecifications || []).forEach(
@@ -199,12 +199,15 @@ export const resolvers = {
         items.forEach(
           (item: any) => {
             item.productSpecifications = productSpecifications
+            item.productName = toProductIOMessage('productName')(segment, productName, productId)
+            item.productDescription =  toProductIOMessage('productDescription')(segment, productDescription, productId)
           }
         )
       }
       return items
     }
   },
+
   OnlyProduct: {
     categoryTree: productCategoriesToCategoryTree,
   },
