@@ -86,7 +86,7 @@ export const resolvers = {
       benefitsQueries.benefits(_, { id: productId }, ctx),
 
     categoryTree: productCategoriesToCategoryTree,
-    
+
     productName: (
       { productName, productId }: any,
       _: any,
@@ -175,16 +175,16 @@ export const resolvers = {
     },
 
     items: (product: any, _: any, { clients: { segment } }: Context) => {
-      const {allSpecifications, items, productId, productName, description: productDescription} = product
+      const { allSpecifications, items, productId, productName, description: productDescription, brand: brandName } = product
       let productSpecifications = new Array() as [productSpecification]
 
       (allSpecifications || []).forEach(
         (specification: string) => {
           let productSpecification: productSpecification = {
             fieldName: toProductIOMessage('fieldName')(segment, specification, productId),
-            fieldValues: new Array() as [Promise<{ content: string; from: string; id: string; }>] 
+            fieldValues: new Array() as [Promise<{ content: string; from: string; id: string; }>]
           };
-          
+
           (product[specification] || []).forEach(
             (value: string) => {
               productSpecification.fieldValues.push(toProductIOMessage('fieldValue')(segment, value, productId))
@@ -194,13 +194,14 @@ export const resolvers = {
           productSpecifications.push(productSpecification)
         }
       )
-      
-      if(items && items.length > 0) {
+
+      if (items && items.length > 0) {
         items.forEach(
           (item: any) => {
             item.productSpecifications = productSpecifications
             item.productName = toProductIOMessage('productName')(segment, productName, productId)
-            item.productDescription =  toProductIOMessage('productDescription')(segment, productDescription, productId)
+            item.productDescription = toProductIOMessage('productDescription')(segment, productDescription, productId)
+            item.brandName = toProductIOMessage('brandName')(segment, brandName, productId)
           }
         )
       }
