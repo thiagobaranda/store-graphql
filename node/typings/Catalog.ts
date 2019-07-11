@@ -63,5 +63,6 @@ interface Product {
   descriptionShort: string
   keywords: string
   titleTag: string
+  jsonSpecifications: string
 }
 
