@@ -111,12 +111,6 @@ export const resolvers = {
       { clients: { segment } }: Context
     ) => toProductIOMessage('keywords')(segment, keywords, productId),
 
-    title: (
-      { title, productId }: any,
-      _: any,
-      { clients: { segment } }: Context
-    ) => toProductIOMessage('title')(segment, title, productId),
-
     metaTagDescription: (
       { metaTagDescription, productId }: any,
       _: any,
@@ -154,7 +148,11 @@ export const resolvers = {
 
     recommendations: (product: any) => product,
 
-    titleTag: ({ productTitle }: any) => productTitle,
+    titleTag: (
+      { productTitle, productId }: any,
+      _: any,
+      { clients: { segment } }: Context
+    ) => toProductIOMessage('productTitle')(segment, productTitle, productId),
 
     specificationGroups: (product: any) => {
       const allSpecificationsGroups = propOr(

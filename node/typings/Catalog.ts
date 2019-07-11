@@ -60,5 +60,8 @@ interface Product {
   link: string
   description: string
   items: any[]
+  descriptionShort: string
+  keywords: string
+  titleTag: string
 }
 
