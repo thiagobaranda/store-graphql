@@ -25,8 +25,8 @@ const inflightKey = ({ baseURL, url, params, headers }: RequestConfig) => {
 
 interface CategoryWithNulls
   extends Pick<
-  Category,
-  'id' | 'name' | 'hasChildren' | 'MetaTagDescription' | 'Title'
+    Category,
+    'id' | 'name' | 'hasChildren' | 'MetaTagDescription' | 'Title'
   > {
   url: null
   children: null
@@ -111,7 +111,7 @@ export class Catalog extends AppClient {
 
   public brand = (id: number) => this.get<Brand[]>(
     `/pub/brand/${id}`,
-    { metric: 'catalog-brands' }
+    {metric: 'catalog-brands'}
   )
 
   public categories = (treeLevel: number) =>
@@ -197,8 +197,8 @@ export class Catalog extends AppClient {
     return `/pub/products/search/${sanitizedQuery}?${category &&
       !query &&
       `&fq=C:/${category}/`}${(specificationFilters &&
-        specificationFilters.length > 0 &&
-        specificationFilters.map(filter => `&fq=${filter}`)) ||
+      specificationFilters.length > 0 &&
+      specificationFilters.map(filter => `&fq=${filter}`)) ||
       ''}${priceRange && `&fq=P:[${priceRange}]`}${collection &&
       `&fq=productClusterIds:${collection}`}${salesChannel &&
       `&fq=isAvailablePerSalesChannel_${salesChannel}:1`}${orderBy &&
